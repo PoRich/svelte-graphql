@@ -3,7 +3,7 @@ const config = {
 	purge: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		extend: {}
+		extend: {},
 	},
 	// add daisyUI plugin
 	plugins: [require('@tailwindcss/typography'), require('daisyui')],
@@ -14,8 +14,8 @@ const config = {
 		base: true,
 		utils: true,
 		logs: true,
-		rtl: false
-	}
-};
+		rtl: false,
+	},
+}
 
-module.exports = config;
+module.exports = config

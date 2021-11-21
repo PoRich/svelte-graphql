@@ -9,10 +9,16 @@
 </script>
 
 <script>
-	import '../app.css';
+	import { onMount } from 'svelte';
+	import { themeChange } from 'theme-change';
+	import '../app.postcss';
 	import Nav from '$lib/nav.svelte';
 
 	export let pages;
+
+	onMount(async () => {
+		themeChange(false);
+	});
 </script>
 
 <Nav {pages} />

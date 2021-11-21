@@ -18,7 +18,7 @@
 </script>
 
 <svelte:head>
-	<title>Sparkles Blog | {title}</title>
+	<title>Sparkles Blog | {page.title}</title>
 </svelte:head>
 <h1 class="text-4xl font-semibold mb-5">{title}</h1>
 <article class="prose">
