@@ -1,59 +1,38 @@
 <script context="module">
-	export const prerender = true;
+	export const load = async ({ fetch }) => {
+		const res = await fetch('/posts.json');
+		if (res.ok) {
+			const { posts } = await res.json();
+			return { props: { posts } };
+		}
+	};
 </script>
 
 <script>
-	import Counter from '$lib/Counter.svelte';
+	export let posts;
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Sparkles Blog | Welcome</title>
 </svelte:head>
 
-<section>
-	<h1>
-		<div class="welcome">
-			<picture>
-				<source srcset="svelte-welcome.webp" type="image/webp" />
-				<img src="svelte-welcome.png" alt="Welcome" />
-			</picture>
+<h1 class="text-4xl mb-10 font-extrabold">Sparkles Blog</h1>
+
+{#each posts as { title, slug, excerpt, coverImage, tags }}
+	<div class="card text-center shadow-2xl mb=20" />
+	<figure class="px-10 pt-10">
+		<img class="rounded-xl" src={coverImage.url} alt={`Cover image for ${title}`} />
+	</figure>
+	<div class="card-body">
+		<h2 class="flex justify-center title">{title}</h2>
+		<p class="flex justify-center">{excerpt}</p>
+		<div class="flex justify-center mt-5 space-x-2">
+			{#each tags as tag}
+				<span class="badge badge-primary">{tags}</span>
+			{/each}
 		</div>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/index.svelte</strong>
-	</h2>
-
-	<Counter />
-</section>
-
-<style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 1;
-	}
-
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
-</style>
+		<div class="justify-center card-actions">
+			<a href={`/posts/${slug}`} class="btn btn-outline btn-primary">Read &rArr;</a>
+		</div>
+	</div>
+{/each}

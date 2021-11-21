@@ -5,8 +5,17 @@ const config = {
 	theme: {
 		extend: {}
 	},
-
-	plugins: []
+	// add daisyUI plugin
+	plugins: [require('@tailwindcss/typography'), require('daisyui')],
+	// config (optional)
+	daisyui: {
+		styled: true,
+		themes: true,
+		base: true,
+		utils: true,
+		logs: true,
+		rtl: false
+	}
 };
 
 module.exports = config;
